@@ -7,7 +7,7 @@ public class ConexionDB {
     
     public static Connection getConexion(){
         Connection con = null;
-        String cadena = "jdbc:mysql://localhost/LittleLions?user=root&password=";
+        String cadena = "jdbc:mysql://localhost/TiendaLittleLions?user=root&password=";
         try{
             Class.forName("com.mysql.jdbc.Driver");            
             con = DriverManager.getConnection(cadena);            

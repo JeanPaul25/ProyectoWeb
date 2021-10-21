@@ -62,7 +62,7 @@ public class Servlet extends HttpServlet {
                                 
                 try{
                     
-                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Producto");
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Productos");
                                            
                     ResultSet rs = psta.executeQuery();
 
@@ -70,8 +70,8 @@ public class Servlet extends HttpServlet {
                         
                     while(rs.next()){       
                         ProductosBeans pro = new ProductosBeans(rs.getInt(1),
-                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), 
-                                rs.getString(7), rs.getDouble(8));
+                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), 
+                                rs.getDouble(7), rs.getDouble(8));
 
                         lista.add(pro);
                     }
@@ -90,7 +90,7 @@ public class Servlet extends HttpServlet {
                 
                 try{
                     
-                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Producto where marca = ?");
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Productos where marca = ?");
                                            
                     psta.setString(1, opc);
                     
@@ -100,8 +100,8 @@ public class Servlet extends HttpServlet {
 
                     while(rs.next()){
                         ProductosBeans pro = new ProductosBeans(rs.getInt(1),
-                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), 
-                                rs.getString(7), rs.getDouble(8));
+                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), 
+                                rs.getDouble(7), rs.getDouble(8));
 
                         lista.add(pro);
                     }
@@ -120,7 +120,7 @@ public class Servlet extends HttpServlet {
                                 
                 try{
                     
-                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Producto where categoria = ?");
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Productos where categoria = ?");
                                            
                     psta.setString(1, opc);
                     
@@ -130,8 +130,8 @@ public class Servlet extends HttpServlet {
                     
                     while(rs.next()){
                         ProductosBeans pro = new ProductosBeans(rs.getInt(1),
-                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), 
-                                rs.getString(7), rs.getDouble(8));
+                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), 
+                                rs.getDouble(7), rs.getDouble(8));
 
                         lista.add(pro);
                     }
@@ -153,7 +153,7 @@ public class Servlet extends HttpServlet {
                 
                 try{
                     
-                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Producto where IDProducto = ?");
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Productos where codProducto = ?");
                                            
                     psta.setInt(1, cod);
                     
@@ -163,8 +163,8 @@ public class Servlet extends HttpServlet {
                     
                     while(rs.next()){
                         ProductosBeans pro = new ProductosBeans(rs.getInt(1),
-                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), 
-                                rs.getString(7), rs.getDouble(8));
+                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), 
+                                rs.getDouble(7), rs.getDouble(8));
 
                         lista.add(pro);
                     }
@@ -218,15 +218,15 @@ public class Servlet extends HttpServlet {
                         categoriaR = "Niños";
                     }
                         
-                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("insert into producto values(?,?,?,?,?,?,?,?)");
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("insert into Productos values(?,?,?,?,?,?,?,?)");
                     
                     psta.setString(1, null);
                     psta.setString(2, nom); 
                     psta.setString(3, descrp); 
                     psta.setString(4, marcaR); 
-                    psta.setInt(5, stock);
-                    psta.setDouble(6, precio);
-                    psta.setString(7, categoriaR);
+                    psta.setString(5, categoriaR);
+                    psta.setInt(6, stock);
+                    psta.setDouble(7, precio);
                     psta.setDouble(8, desc);
 
                     psta.executeUpdate();
@@ -243,7 +243,7 @@ public class Servlet extends HttpServlet {
         }else if(ope.equals("Mostrar")){
             
             try{
-                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Producto");
+                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from Productos");
                 
                 ResultSet rs = psta.executeQuery();
                 
@@ -251,9 +251,9 @@ public class Servlet extends HttpServlet {
                 
                 while(rs.next()){
                     
-                    ProductosBeans prod = new ProductosBeans(rs.getInt(1), 
-                            rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),  
-                            rs.getDouble(6), rs.getString(7), rs.getDouble(8));
+                    ProductosBeans prod = new ProductosBeans(rs.getInt(1),
+                                rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), 
+                                rs.getDouble(7), rs.getDouble(8));
                     
                     lista.add(prod);
                 }
@@ -298,15 +298,15 @@ public class Servlet extends HttpServlet {
                     categoriaR = "Niños";
                 }
 
-                 PreparedStatement psta = ConexionDB.getConexion().prepareStatement("update producto set Nombre=?,"
-                    + "Descripcion=?, Marca=?, Stock=?, Precio=?, Categoria=?, Descuento=? where IDProducto=?");
+                 PreparedStatement psta = ConexionDB.getConexion().prepareStatement("update Productos set Nombre=?,"
+                    + "Descripcion=?, Marca=?, Categoria=?, Stock=?, Precio=?, Descuento=? where codProducto=?");
 
                 psta.setString(1, nom); 
                 psta.setString(2, descrp); 
                 psta.setString(3, marcaR); 
-                psta.setInt(4, stock);
-                psta.setDouble(5, precio);
-                psta.setString(6, categoriaR);
+                psta.setString(4, categoriaR);
+                psta.setInt(5, stock);
+                psta.setDouble(6, precio);
                 psta.setDouble(7, desc); 
                 psta.setInt(8, Integer.parseInt(request.getParameter("txtCod")));
                 
@@ -328,7 +328,7 @@ public class Servlet extends HttpServlet {
             int cod = Integer.parseInt(request.getParameter("cod"));
             
             try{
-                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("delete from producto where IDproducto = ?");    
+                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("delete from Productos where codProducto = ?");    
                 
                 psta.setInt(1, cod);
 

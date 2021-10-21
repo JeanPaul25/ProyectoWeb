@@ -11,14 +11,14 @@ public class ProductosBeans {
     String categoria;
     double desc;
 
-    public ProductosBeans(int cod, String nom, String descrp, String marca, int stock, double precio, String categoria, double desc) {
+    public ProductosBeans(int cod, String nom, String descrp, String marca, String categoria, int stock, double precio, double desc) {
         this.cod = cod;
         this.nom = nom;
         this.descrp = descrp;
         this.marca = marca;
+        this.categoria = categoria;
         this.stock = stock;
         this.precio = precio;
-        this.categoria = categoria;
         this.desc = desc;
     }
 
@@ -86,7 +86,7 @@ public class ProductosBeans {
         this.desc = desc;
     }
 
-    
+      
 
     
 }
