@@ -148,11 +148,14 @@
                                                 <td> <input class="form-control" type="number" step="0.01" min="0" value="0" name="numDesc"> </td>
                                             </tr>
                                             
+                                            
+                                            <!-- //Para ingresar imágenes 
                                             <tr>
                                                 <td> Imagen: </td>
                                                 <td> <input class="form-file" type="file" name="fileImagen"> </td>
                                             </tr>
-
+                                            -->
+                                            
                                             <tr>
                                                 <td colspan="2"> <input type="submit" value="Agregar Producto" class="form-control btn btn-primary"> </td>                        
                                             </tr> 

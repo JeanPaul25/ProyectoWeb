@@ -188,11 +188,11 @@ public class Servlet extends HttpServlet {
                 System.out.println("Conexión Opcion");
                 
                 try{
-                                        
+                    /*          //Para Ingreso de Imagenes                    
                     Part imagen = request.getPart("fileImagen");                    
                     String imagenName = Paths.get(imagen.getSubmittedFileName()).getFileName().toString();
                     InputStream imagenContent = imagen.getInputStream();
-                    
+                    */
                         
                     String nom = request.getParameter("txtNom");
                     String descrp = request.getParameter("txtDescrp");
