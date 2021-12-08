@@ -340,10 +340,50 @@ public class Servlet extends HttpServlet {
                 
             }catch(Exception e){
                 System.out.println("Error: " + e);
+            }            
+        }else if(ope.equals("Login")){
+            System.out.println("Login");
+            
+            String correo = request.getParameter("txtCorreo");
+            String contraseña = request.getParameter("txtContraseña");
+            
+            try {
+                
+                ResultSet usuario = null;
+                String respuesta = null;
+                String[] correoS = correo.split("-");
+                if(correoS[1].equals("Emp")){
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from empleados where correo=? and contraseña=?");    
+                    
+                    psta.setString(1, correo);
+                    psta.setString(2, contraseña);
+                    
+                    usuario = psta.executeQuery();
+                }else{
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from clientes where correo=? and contraseña=?");    
+                    
+                    psta.setString(1, correo);
+                    psta.setString(2, contraseña);
+
+                    psta.executeQuery();
+                }
+                
+                if(usuario != null){
+                    respuesta = "Bienvenido Usuario";
+                }else{
+                    respuesta = "Correo o Contraseña Incorrecta";
+                }
+                    
+                
+                
+                ConexionDB.getConexion().close();
+                
+                
+                
+                request.getRequestDispatcher("Servlet?operacion=Mostrar").forward(request, response);
+            } catch (Exception e) {
+                System.out.println("Error Login: " + e);
             }
-            
-            
-            
         }
             
             
