@@ -43,23 +43,32 @@
                 <%
                     for(int i = 0; i < lista.size(); i++){
                         
-                        ProductosBeans emp = lista.get(i);
-                    
+                        ProductosBeans prod = lista.get(i);
+                        Double precioFinal = prod.getPrecio() - prod.getDesc();
                         %>
                     
                         
                         <div class="col p-4" align="center">
                             <div class="card h-100" style="width: 20rem;">
-                                <img src="img/Productos/1.png" class="card-img-top h-50" alt="...">
+                                <img src="img/Productos/<%=prod.getImagen()%>" class="card-img-top" style="max-height:12.5rem;" alt="...">
                                 <div class="card-body h-100">
-                                    <p style="text-align: center"> <%= emp.getNom() %> </p> 
+                                    <p style="text-align: center"> <%= prod.getNom() %> </p> 
                                     <hr>
-                                    <button type="button" class="btn btn-info"> Comprar </button>
-                                    <p class="card-text"> <%= emp.getDescrp() %> </p>
-                                    <p> Marca: <%= emp.getMarca() %> </p>
-                                    <p> Categoría <%= emp.getCategoria() %> </p>
-                                    <p align="center"> Precio: <%= emp.getPrecio() %> </p>
-                                    <p align="center"> Descuento: <%= emp.getDesc() %> </p>
+                                    <form action="Servlet">
+                                        <input type="hidden" name="operacion" value="AgregarCarrito">
+                                        <input type="hidden" name="cod" value="<%= prod.getCod()%>">
+                                        <input type="hidden" name="img" value="<%= prod.getImagen()%>">
+                                        <input type="hidden" name="nom" value="<%= prod.getNom()%>">
+                                        <input type="hidden" name="precio" value="<%= prod.getPrecio()%>">
+                                        <input type="hidden" name="desc" value="<%= prod.getDesc()%>">
+                                        <input type="submit" value="Agregar Producto" class="btn btn-info">                     
+                                    </form>
+                                    <p class="card-text"> <%= prod.getDescrp() %> </p>
+                                    <p> Marca: <%= prod.getMarca() %> </p>
+                                    <p> Categoría <%= prod.getCategoria() %> </p>
+                                    <p align="center"> Precio: <%= prod.getPrecio() %> </p>
+                                    <p align="center"> Descuento: <%= prod.getDesc() %> </p>                                    
+                                    <p align="center" style="font-weight: bold"> Precio Final: <%= precioFinal %> </p>
                                 </div>
                             </div>
                         </div>   

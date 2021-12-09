@@ -80,7 +80,7 @@
                 </div>
                 
                 <div class="d-flex p-4 w-5">
-                    <a href="Login.jsp?boton=Inicio"> <img src="img/Iconos/login.png" class="img-fluid float-right" style="height: 2.5rem;" alt="Login"> </a>                            
+                    <a href="Dashboard.jsp"> <img src="img/Iconos/login.png" class="img-fluid float-right" style="height: 2.5rem;" alt="Login"> </a>                            
                 </div>
                 
             </div>

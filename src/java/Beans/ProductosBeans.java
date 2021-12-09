@@ -2,16 +2,17 @@ package Beans;
 
 public class ProductosBeans {
     
-    int cod;
+    String cod;
     String nom;
-    String descrp;
-    String marca;
+    String descrp;   
+    String marca; 
+    String categoria;
     int stock;
     double precio;
-    String categoria;
-    double desc;
+    double desc;    
+    String imagen;
 
-    public ProductosBeans(int cod, String nom, String descrp, String marca, String categoria, int stock, double precio, double desc) {
+    public ProductosBeans(String cod, String nom, String descrp, String marca, String categoria, int stock, double precio, double desc, String imagen) {
         this.cod = cod;
         this.nom = nom;
         this.descrp = descrp;
@@ -20,13 +21,14 @@ public class ProductosBeans {
         this.stock = stock;
         this.precio = precio;
         this.desc = desc;
+        this.imagen = imagen;
     }
 
-    public int getCod() {
+    public String getCod() {
         return cod;
     }
 
-    public void setCod(int cod) {
+    public void setCod(String cod) {
         this.cod = cod;
     }
 
@@ -54,6 +56,14 @@ public class ProductosBeans {
         this.marca = marca;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -70,14 +80,6 @@ public class ProductosBeans {
         this.precio = precio;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
     public double getDesc() {
         return desc;
     }
@@ -86,7 +88,15 @@ public class ProductosBeans {
         this.desc = desc;
     }
 
-      
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    
 
     
 }

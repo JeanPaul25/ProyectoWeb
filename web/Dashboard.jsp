@@ -53,6 +53,10 @@
                             <div class="container p-4">
                                 <a href="#"> <button type="button" class="btn btn-info" disabled> En Proceso </button> </a>                                
                             </div>
+                        
+                            <div class="container p-4">
+                                <a href="index.jsp"> <button type="button" class="btn btn-primary"> Regresar </button> </a>                                
+                            </div>
 
                     </div>
                     
@@ -74,7 +78,7 @@
                             </div>
                             <div class="text-center">
                                 <div>   
-                                    <h3> Bienvenido Usuario: Cod </h3>                                
+                                    <h3> Bienvenido Administrador </h3>                                
                                 </div>                               
                             </div>
                             
@@ -89,15 +93,51 @@
                                 <div class="row p-4">  
 
                                     <h2 align="center"> Agregar Productos </h2>
-
+                                                                       
+                                    <form action="subir.jsp" enctype="multipart/form-data" method="post">  
+                                        <table class="table">
+                                    
+                                    <%                                               
+                                                String img = request.getParameter("img");
+                                                if(img == null){
+                                                %>
+                                            <tr>
+                                                <td> Imagen: </td>
+                                                <td> 
+                                                    <input type="file" name="inFile" class="form-control">
+                                                    <input type="submit" name="subImagen" value="Agregar Imagen" class="btn btn-primary">
+                                                </td>
+                                            </tr>
+                                            <%
+                                                }else{
+                                                %>
+                                            <tr>
+                                                <td> Imagen: </td>
+                                                <td> 
+                                                    <input type="text" name="txtImagen" class="form-control" readonly="readonly"
+                                                            value="<%=img%>"> 
+                                                </td>
+                                            </tr>
+                                            <%
+                                                }
+                                                %>
+                                        </table>
+                                    </form>
+                                        
                                     <form action="Servlet" class="form-control" enctype="multipart/form-data">
                                         
                                         <input type="hidden" name="operacion" value="Agregar">
                                         
                                         <input type="hidden" name="opcion" value="Producto">
                                         
+                                        <input type="hidden" name="txtImagen" value="<%=img%>">
+                                        
                                         <table class="table">
-
+                                            
+                                            <tr>
+                                                <td> Código </td>
+                                                <td> <input class="form-control" type="text" name="txtCod"> </td>
+                                            </tr>
                                             <tr>
                                                 <td> Nombre: </td>
                                                 <td> <input class="form-control" type="text" name="txtNom"> </td>
@@ -147,14 +187,6 @@
                                                 <td> Descuento: </td>
                                                 <td> <input class="form-control" type="number" step="0.01" min="0" value="0" name="numDesc"> </td>
                                             </tr>
-                                            
-                                            
-                                            <!-- //Para ingresar imágenes 
-                                            <tr>
-                                                <td> Imagen: </td>
-                                                <td> <input class="form-file" type="file" name="fileImagen"> </td>
-                                            </tr>
-                                            -->
                                             
                                             <tr>
                                                 <td colspan="2"> <input type="submit" value="Agregar Producto" class="form-control btn btn-primary"> </td>                        

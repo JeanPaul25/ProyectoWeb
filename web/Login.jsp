@@ -26,7 +26,7 @@
                     if(btn.equals("Inicio")){                                   
                 %>
             
-            <h2 class="text-light"> Seleccione una opción </h2>
+            <h2 class="text-light"> Ingreso y Registro </h2>
 
                 <div class="container p-4">
                     <a href="Login.jsp?boton=Ingresar"> <button type="button" class="btn btn-info"> Ingresar </button> </a>                                
