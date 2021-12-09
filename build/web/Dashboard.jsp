@@ -1,3 +1,5 @@
+<%@page import="Beans.CestaBeans"%>
+<%@page import="Beans.VentaBeans"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Beans.ProductosBeans"%> 
 
@@ -31,7 +33,7 @@
                             </div>
 
 
-                        <h3 class="text-light"> Clientes </h3>
+<!--                        <h3 class="text-light"> Clientes </h3>
 
                             <div class="container p-4"> 
                                 <a href="#"> <button type="button" class="btn btn-info" disabled> Mostrar </button> </a>
@@ -46,12 +48,12 @@
 
                             <div class="container p-4"> 
                                 <a href="#"> <button type="button" class="btn btn-info" disabled> Mostrar </button> </a>
-                            </div>
+                            </div>-->
 
                         <h3 class="text-light"> Ventas </h3>
 
                             <div class="container p-4">
-                                <a href="#"> <button type="button" class="btn btn-info" disabled> En Proceso </button> </a>                                
+                                <a href="Servlet?operacion=Consultar&opcion=Ventas"> <button type="button" class="btn btn-info"> En Proceso </button> </a>                                
                             </div>
                         
                             <div class="container p-4">
@@ -251,6 +253,51 @@
                         %>
                         
                                     </table>
+                        
+                    <%
+                            }else if(btn.equals("MostrarV")){  
+                                ArrayList<VentaBeans> arrayVentas = (ArrayList<VentaBeans>)request.getAttribute("arrayVentas");
+                                ArrayList<CestaBeans> arrayCesta = (ArrayList<CestaBeans>)request.getAttribute("arrayCesta");
+                        %>
+                            
+                            <table class="table" style="text-align: center">
+                                        <tr> 
+                                            <th> Cliente </th>
+                                            <th> DNI </th>
+                                            <th> Dirección </th>
+                                            <th> Teléfono </th>
+                                        </tr>
+                            
+                    <%
+                                for(int i = 0; i < arrayVentas.size(); i++){
+
+                                    VentaBeans lista = arrayVentas.get(i);
+                        %>                                  
+                                        <tr>
+                                            <td> <%= lista.getApel() %> </td>
+                                            <td> <%= lista.getDni() %> </td>
+                                            <td> <%= lista.getDir() %> </td>
+                                            <td> <%= lista.getTel() %> </td>
+                                        </tr>    
+                                        
+                    <%
+                                    for (int j = 0; j < arrayCesta.size(); j++) {
+
+                                        CestaBeans lista2 = arrayCesta.get(j);
+                        %>
+                                        <tr>
+                                            <td colspan="2"> <%= lista2.getCod() %> </td>
+                                            <td colspan="2"> <%= lista2.getCantidad() %> </td>
+                                        </tr> 
+                    <%              
+                                    }
+                                }                                                
+                        %>
+                        <tr>
+                            <td colspan="4"> </td>                            
+                        </tr>
+                                    </table>
+                        
                         
                     <%
                             }else if(btn.equals("Editar")){     

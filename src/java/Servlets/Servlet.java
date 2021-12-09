@@ -177,6 +177,46 @@ public class Servlet extends HttpServlet {
                 }
                 
                 
+            }else if(opc.equals("Ventas")){             
+                ArrayList<VentaBeans> arrayVentas = new ArrayList();
+                ArrayList<CestaBeans> arrayCesta = new ArrayList();
+                try {
+                    PreparedStatement psta = ConexionDB.getConexion().prepareStatement("select * from venta");
+                    
+                    ResultSet rs = psta.executeQuery();
+                    
+                    
+                    while(rs.next()){
+                        VentaBeans venta = new VentaBeans(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5));
+                        arrayVentas.add(venta);
+                        
+                        System.out.println("DatosB: " + rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getString(4) + " " + rs.getInt(5));
+                      
+                        PreparedStatement psta2 = ConexionDB.getConexion().prepareStatement("select codProducto, cant from detalleventas where codVenta = ?");
+                        psta2.setInt(1, rs.getInt(1));
+                        System.out.println("Datos: " + rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getString(4) + " " + rs.getInt(5));
+                        ResultSet rs2 = psta2.executeQuery();                       
+                        
+                        while(rs2.next()){               
+                            System.out.println("Datos 2: " + rs2.getString(1) + " --- " + rs2.getInt(2));                                         
+                            CestaBeans cesta = new CestaBeans(rs2.getString(1), rs2.getInt(2));
+                            arrayCesta.add(cesta);
+                        }
+                    }                   
+                    
+                    
+                    request.setAttribute("arrayVentas", arrayVentas); 
+                    request.setAttribute("arrayCesta", arrayCesta);
+
+                    ConexionDB.getConexion().close();
+                    
+                    arrayVentas = new ArrayList();
+                    arrayCesta = new ArrayList();
+                    
+                    request.getRequestDispatcher("Dashboard.jsp?boton=MostrarV").forward(request, response);  
+                } catch (Exception e) {
+                    System.out.println("Error Mostrar Ventas: " + e);
+                }
             }
         }else if(ope.equals("Agregar")){
             
@@ -421,7 +461,7 @@ public class Servlet extends HttpServlet {
             int tel = Integer.parseInt(request.getParameter("txtTel"));
             
             try {                
-                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("insert into ventas values(?,?,?,?,?)");    
+                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("insert into venta values(?,?,?,?,?)");    
 
                 psta.setString(1, null);
                 psta.setString(2, apel);
@@ -438,7 +478,21 @@ public class Servlet extends HttpServlet {
                 System.out.println("Error Venta: " + e);
             }
         }else if(ope.equals("Detalles")){
-            String venta = request.getParameter("codVenta");
+            int cont = 0;
+            try {                
+                PreparedStatement pstaC = ConexionDB.getConexion().prepareStatement("select codVenta from venta");
+                ResultSet ventaA = pstaC.executeQuery();
+              
+                while(ventaA.next()){
+                    cont = ventaA.getInt(1);
+                }
+                System.out.println("Contar:" + cont);
+                
+                ConexionDB.getConexion().close();
+            } catch (Exception e) {
+                System.out.println("Error Contar: " + e);
+            }
+            
             String pro = request.getParameter("codProducto");
             int cant = Integer.parseInt(request.getParameter("cant"));
             String estado = request.getParameter("estado");
@@ -446,10 +500,10 @@ public class Servlet extends HttpServlet {
             int contador = Integer.parseInt(request.getParameter("cont"));
             
             try {                
-                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("insert into detalleVenta values(?,?,?,?)");    
+                PreparedStatement psta = ConexionDB.getConexion().prepareStatement("insert into detalleVentas values(?,?,?,?)");    
 
                 psta.setString(1, null);
-                psta.setString(2, venta);
+                psta.setInt(2, cont);
                 psta.setString(3, pro);
                 psta.setInt(4, cant);
 

@@ -9,6 +9,11 @@ public class CestaBeans {
     Double precioFinal;
     int cantidad;
 
+    public CestaBeans(String cod, int cantidad){
+        this.cod = cod;
+        this.cantidad = cantidad;
+    }
+    
     public CestaBeans(String cod, String img, String nombre, Double precio, Double descuento, Double precioFinal, int cantidad) {
         this.cod = cod;
         this.img = img;
